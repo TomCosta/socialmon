@@ -1,0 +1,7 @@
+{
+    "CoreLocation.framework": 2,
+    "ImageIO.framework": 2,
+    "AVFoundation.framework": 1,
+    "QuartzCore.framework": 1,
+    "Photos.framework": 1
+}

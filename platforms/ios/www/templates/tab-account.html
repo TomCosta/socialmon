@@ -1,0 +1,46 @@
+<ion-view view-title="Me">
+  <ion-content>
+    <ion-list>
+        <ion-item style="height:100px;">
+            <div class="item-avatar" style="float:left;">
+                <img style="max-width:62px;max-height:62px;" ng-src="{{auth.profile.picture}}">
+            </div>
+            <h2 style="line-height:180%;">
+                <strong>
+                    <span ng-show="!me.display_name">{{auth.profile.name}}</span>
+                    <span ng-show="me.display_name">{{me.display_name}}</span>
+                </strong>
+            </h2>
+            <p>Socialmon ID: {{auth.profile.email}}</p>
+        </ion-item>
+
+        <a ui-sref=".editprofile" class="item item-icon-left">
+            <i class="icon ion-edit"></i>
+            Change Display Name
+        </a>
+
+<!--         <a href="#" class="item item-icon-left">
+            <i class="icon ion-email"></i>
+            Item
+        </a>
+
+        <a href="#" class="item item-icon-left">
+            <i class="icon ion-email"></i>
+            Item
+        </a>
+
+        <a href="#" class="item item-icon-left">
+            <i class="icon ion-gear-a"></i>
+            Settings
+        </a> -->
+<!-- 
+        <ion-toggle  ng-model="settings.localtime">
+            Use Local Time
+        </ion-toggle>
+        <ion-toggle  ng-model="settings.globalization">
+            Auto Detect Preferred Language
+        </ion-toggle> -->
+    </ion-list>
+    <a class="button button-block button-assertive" ng-click="logout()">Sign out</a>
+  </ion-content>
+</ion-view>

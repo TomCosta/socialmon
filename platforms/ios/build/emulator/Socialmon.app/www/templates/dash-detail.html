@@ -1,0 +1,62 @@
+<ion-view>
+  <div class="bar bar-subheader item-input-inset bar-light">
+    <p class="title">{{activity.event_name}}</p>
+  </div>
+
+  <ion-content class="has-subheader">
+    <div class="card">
+      <ion-item class="item item-divider item-stable" ng-click="toggleGroupMap(groupmap)" ng-class="{active: isGroupMapShown(groupmap)}">
+        <i class="icon" ng-class="isGroupMapShown(groupmap)"></i><strong>Map</strong>
+      </ion-item>
+      <ion-item class="item-accordion" ng-show="isGroupMapShown(groupmap)">
+        <div style="width:100%;height:300px;" id="map">
+          <div style="position:relative; text-align:center;" ng-show="!activities.length">
+              <ion-spinner icon="ripple" style="margin: 0 auto; position:relative; top:150px;"></ion-spinner> 
+              <span style="position:relative;top:170px;">Loading...</span>
+            </div>
+        </div>
+      </ion-item>
+    </div>
+
+    <div class="card">
+      <ion-item class="item item-divider item-stable" ng-click="toggleGroupDetails(groupdetails)" ng-class="{active: isGroupDetailsShown(groupdetails)}">
+        <i class="icon" ng-class="isGroupDetailsShown(groupdetails)"></i><strong>Details</strong>
+      </ion-item>
+      <ion-item class="item-accordion" ng-show="isGroupDetailsShown(groupdetails)">
+        <div class="item item-image">
+          <img src="http://placehold.it/600x200" alt="Item Img">
+        </div>
+        <div style="line-height:180%;">
+          <p>{{activity.event_description}}</p>
+          <div>
+            <p>Location: {{activity.event_streetaddress}}, {{activity.event_city}}<!-- <a style="float:right;" class="button button-outline button-small button-assertive" ng-click="">Join the Party</a> --></p>
+            <p>Start Time: {{activity.event_starttime | date: 'shortTime'}}</p>
+            <p>Duration: {{activity.event_duration}} hour<span ng-show="{{activity.event_duration - 1}}">s<span></p>
+            <p ng-show="activity.event_maxparticipants">Available Seats: {{activity.event_maxparticipants - activity.event_currparticipants}} / {{activity.event_maxparticipants}}</p>
+            <p ng-show="activity.event_sponsor">Sponsor: {{activity.event_sponsor}}</p>
+          </div>
+        </div>
+      </ion-item>
+    </div>
+
+    <div class="card" ng-show="activity.contact_name || activity.contact_phone || activity.contact_email">
+      <ion-item class="item item-divider item-stable" ng-click="toggleGroupContact(groupcontact)" ng-class="{active: isGroupContactShown(groupcontact)}">
+        <i class="icon" ng-class="isGroupContactShown(groupcontact)"></i><strong>Contact Information</strong>
+      </ion-item>
+      <ion-item class="item-accordion" ng-show="isGroupContactShown(groupcontact)">
+        <div style="line-height:180%;">
+          <p ng-show="activity.contact_name">Contact: {{activity.contact_name}}</p>
+          <p ng-show="activity.contact_phone">Phone: {{activity.contact_phone}}</p>
+          <p ng-show="activity.contact_email">Email: {{activity.contact_email}}</p>
+        </div>
+      </ion-item>
+    </div>
+
+    <div class="item item-divider">Comments</div>
+    <label class="item item-input item-stacked-label">
+      <span class="input-label">Post as {{auth.profile.name}}: </span>
+      <textarea name="commcontent" id="txtcommcontent" ng-model="comm.content" ng-keyup="expandText()" ng-keydown="expandText()"></textarea>
+    </label>
+
+  </ion-content>
+</ion-view>

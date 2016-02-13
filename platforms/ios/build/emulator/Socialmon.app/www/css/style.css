@@ -1,0 +1,31 @@
+/* Empty. Add your own CSS if you like */
+.item-profile {
+  height: 150px;
+  .item-avatar > img:first-child {
+    max-width: 100px;
+    max-height: 100px:
+  }
+}
+
+.card .item.item-accordion {
+  line-height: 38px;
+  padding-top: 0;
+  padding-bottom: 0;
+  transition: 0.1s all linear;
+}
+
+.card .item.item-accordion.ng-hide {
+  line-height: 0px;
+}
+
+.card .item.item-accordion.ng-hide-add,
+.card .item.item-accordion.ng-hide-remove {
+  display: block !important;
+}
+
+.spinner svg {
+  width: 100px;
+  height: 100px;
+  stroke: #444;
+  fill: #444;
+}

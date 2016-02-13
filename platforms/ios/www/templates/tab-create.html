@@ -1,0 +1,128 @@
+<ion-view view-title="Create">
+  <ion-content>
+  	<form name="myForm" novalidate>
+  		<div class="list">
+
+        <label class="item item-input">
+          <span class="input-label">Name</span>
+          <input type="text" placeholder="Your Socialmon event name" name="eventname" ng-model="sm.eventname" ng-minlength="2" required />
+        </label>
+
+        <label class="item item-input">
+          <div class="input-label">
+            Category
+          </div>
+          <select-box ng-Selected-Value="selectedValue" 
+            ng-Selected-Id="selectedId" 
+            ng-Item-Name="name" 
+            ng-Item-Id="id" 
+            ng-title="Select Category" 
+            ng-data="cateList" 
+            ng-placeholder="Select Category"></select-box>
+        </label>
+
+  			<label class="item item-input">
+  				<span class="input-label">Date</span>
+  				<ionic-datepicker input-obj="datepickerObject" ng-model="date">
+            <button class="button button-clear button-small button-assertive"> {{datepickerObject.inputDate | date:'dd - MMMM - yyyy'}}</button>
+          </ionic-datepicker>
+  			</label>
+
+        <label class="item item-input">
+          <span class="input-label">Start Time</span>
+          <ionic-timepicker input-obj="timePickerObject">
+            <button class="button button-clear button-small button-assertive overflowShow">
+              <standard-time-meridian etime='timePickerObject.inputEpochTime'></standard-time-meridian>
+            </button>
+          </ionic-timepicker>
+        </label>
+
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Description</span>
+          <textarea placeholder="A few sentences to attract other Socialmons!" name="description" id="txtdesc" ng-model="sm.desc" ng-keyup="expandText()" ng-keydown="expandText()"></textarea>
+        </label>
+
+        <div class="item item-divider">Location (Mandatory)</div>
+
+  			<label class="item item-input item-stacked-label">
+  				<span class="input-label">Street Address</span>
+  				<input type="text" placeholder="Enter your event's street address here" name="streetaddress" ng-model="sm.streetaddress" required />
+  			</label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">City</span>
+          <input type="text" placeholder="Enter your event's city here" name="city" ng-model="sm.city" required />
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">Postal Code</span>
+          <input type="text" placeholder="Provide postal code here for Socialmon to find it" name="postalcode" ng-model="sm.postalcode" required />
+        </label>
+
+
+        <div class="item item-divider">Additional Information (Optional)</div>
+
+        <label class="item item-input">
+          <span class="input-label">Sponsor</span>
+          <input type="text" placeholder="(Optional)" name="sponsorname" ng-model="sm.sponsorname" />
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Duration (hrs)</span>
+          <input type="number" name="duration" ng-model="sm.duration" 
+          placeholder="(Recommended)" />
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Maximum Participants</span>
+          <input type="number" name="maxparticipants" ng-model="sm.maxparticipants" 
+          placeholder="(Recommended)" />
+        </label>
+
+  			<ion-item class="item item-input item-stacked-label">
+  				<span class="input-label">Pictures (Max: 3)</span>
+          <p ng-show="imageList.length" style="color:red;">* Click on image for more options!</p>
+          <p ng-show="imageList.length > 1" style="color:red;">* Only see one? Slide to the right!</p>
+          <div ng-show="imageList.length">
+            <ion-scroll direction="x" style="height:100px; min-height:100px; overflow:scroll; white-space:nowrap;">
+              <img ng-repeat="image in imageList" ng-src="{{image}}" ng-click="pictureOnClick({{$index}})" style="height:100px;width:300px;padding:5px;" />
+            </ion-scroll>
+          </div>
+            <button class="button button-block button-small button-assertive" ng-click="addMedia()" ng-disabled="imageList.length > 2">Add a Picture</button>
+<!--             <button class="button button-block button-small button-assertive" ng-click"uploadPictures()" ng-disabled="!imageList.length">Upload!</button> -->
+        </ion-item>
+
+  			<div class="item item-divider">Contact Information (Optional)</div>
+
+  			<label class="item item-input">
+  				<span class="input-label">Name</span>
+  				<input type="text" name="contactname" ng-model="sm.contactname" />
+  			</label>
+
+  			<label class="item item-input">
+  				<span class="input-label">E-mail</span>
+  				<input type="email" name="email" ng-model="sm.email" />
+  			</label>
+
+  			<label class="item item-input">
+  				<span class="input-label">Phone</span>
+  				<input type="tel" name="tel" ng-model="sm.tel" />
+  			</label>
+  		</div>
+
+  		<div class="padding">
+  			<button class="button button-block button-assertive" ng-disabled="myForm.$invalid" ng-click="submitForm(sm)">Submit</button>
+  		</div>
+
+  		<div class="padding" style="color:red;">
+  			<p ng-show="myForm.eventname.$error.required">* Event Name is required</p>
+<!--   			<p ng-show="myForm.eventname.$invalid && !myForm.eventname.$pristine">* Event name must be a valid email</p> -->
+  			<p ng-show="myForm.eventname.$error.minlength">* Event Name must be at least 2 characters</p>
+        <p ng-show="myForm.date.$error.required">* Event Date is required</p>
+        <p ng-show="myForm.streetaddress.$error.required">* Street address of event location is required</p>
+        <p ng-show="myForm.city.$error.required">* City of event location is required</p>
+        <p ng-show="myForm.postalcode.$error.required">* Postal code of event location is required</p>
+        <p ng-show="myForm.email.$invalid && !myForm.email.$pristine">* E-mail has to be valid</p>
+  		</div>
+  	</form>
+    <ion-list>
+  </ion-content>
+</ion-view>

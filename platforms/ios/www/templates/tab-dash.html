@@ -1,0 +1,49 @@
+<ion-view view-title="Socialmon">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear ion-compose" ui-sref=".create">
+    </button>
+  </ion-nav-buttons>
+  <div class="bar bar-subheader item-input-inset bar-light">
+    <label class="item-input-wrapper">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input type="search" ng-model="query" placeholder="Search">
+    </label>
+  </div>
+  <ion-content class="has-subheader">
+    <ion-list show-delete="shouldShowDelete"
+              can-swipe="listCanSwipe">
+      <div class="item item-image">
+        <img src="http://placehold.it/600x150" alt="ads img slider">
+      </div>
+
+      <div class="item item-divider item-stable">Upcoming Events</div>
+      <div class="list" ng-show="!activities">
+        <ion-item>No upcoming events...</ion-item>
+      </div>
+
+      <ion-item class="item-thumbnail-left item-text-wrap" ng-repeat="activity in activities | filter: query">
+        <h2 style="float:left;">{{activity.event_name}}</h2>
+        <p style="text-align:right;">{{activity.event_date}}</p>
+        <br />
+        <p>{{activity.event_description | limitTo: 70}} {{activity.event_description.length > 70 ? '&hellip;':''}}</p>
+      </ion-item>
+
+      <div class="item item-divider item-stable">My Socialmons</div>
+      <div style="position:relative; text-align:center;" ng-show="!mySMs.length">
+        <ion-spinner icon="ripple" style="margin: 0 auto; position:relative; top:20px;"></ion-spinner> 
+        <span style="position:relative;top:10px;">Loading...</span>
+      </div>
+      <ion-item class="item" ng-repeat="mySM in mySMs | filter: query">
+        <div>
+          <h2>{{mySM.event_name}}</h2>
+          <p style="position:absolute; right:10%; top:20%;">on {{(mySM.event_date - offset) | date: 'mediumDate'}}</p>
+        </div>
+        <p>{{mySM.event_description | limitTo: 70}} {{mySM.event_description.length > 70 ? '&hellip;':''}}</p>
+        <ion-option-button class="button-assertive" ng-click="details(mySM.id)">
+          Details
+        </ion-option-button>
+      </ion-item>
+
+  </ion-list>
+  </ion-content>
+</ion-view>

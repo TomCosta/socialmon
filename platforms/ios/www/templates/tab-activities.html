@@ -1,0 +1,92 @@
+<ion-view view-title="Browse Events">
+    <ion-nav-buttons side="left">
+      <button class="button button-icon button-clear ion-ios-location" ng-click="mapView()">
+      </button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+      <button class="button button-icon button-clear ion-search" ng-click="goSearch()">
+      </button>
+    </ion-nav-buttons>
+
+<!--     <ion-side-menus>
+        
+        <ion-side-menu-content> -->
+
+          <!-- header bar -->
+          <ion-nav-bar class="bar-positive">
+            <ion-nav-back-button class="button-icon ion-arrow-left-c">
+            </ion-nav-back-button>
+          </ion-nav-bar>
+          <ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+          <div class="bar bar-subheader item-input-inset bar-light">
+            <label class="item-input-wrapper">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input type="search" ng-model="query" placeholder="Search">
+            </label>
+          </div>
+          <!-- contents -->
+          <ion-content class="has-subheader">
+<!-- 
+            <div>offset numbers: {{offset}}</div>
+            <div>Date UTC in numbers: {{dateUTCnumber}}</div>
+            <div>Date UTC: {{dateUTC}}</div>
+            <div>Date Local: {{dateLocal | date:'mediumDate'}}</div> -->
+
+            <ion-refresher pulling-text=" Refreshing..." on-refresh="doRefresh()">
+            </ion-refresher>
+
+            <div style="position:relative; text-align:center;" ng-show="!activities.length">
+              <ion-spinner icon="ripple" style="margin: 0 auto; position:relative; top:180px;"></ion-spinner> 
+              <span style="position:relative;top:170px;">Loading...</span>
+            </div>
+
+            <div class="list list-inset" ng-repeat="activity in activities | filter: query" type="item-text-wrap" >
+              <div class="item item-divider item-stable">
+                <p style="float:left;">{{activity.event_name}}</p>
+                <p style="text-align:right;">{{(activity.event_date - offset) | date: 'mediumDate'}}</p>
+              </div>
+              <div class="item item-body item-body">
+                <div class="item item-image">
+                  <img ng-src="{{activity.event_pictures[0]}}" alt="Item Img">
+                </div>
+                <div>
+                  <p>{{activity.event_description.substring(0,140)}}</p>
+                </div>
+                <div>
+                  <p>Location: {{activity.event_streetaddress}}, {{activity.event_city}}<a style="float:right;" class="button button-outline button-small button-assertive" ng-click="join({{$index}})">Join the Party</a></p>
+                  <p>Start Time: {{activity.event_starttime | date: 'shortTime'}}</p>
+                  <p>Duration: {{activity.event_duration}} hour<span ng-show="{{activity.event_duration > 1}}">s<span></p>
+                  <p ng-show="{{activity.event_maxparticipants}}">Available Seats: {{activity.event_maxparticipants - activity.event_currparticipants}} / {{activity.event_maxparticipants}}</p>
+                  <p ng-show="activity.event_sponsor" >Sponsor: {{activity.event_sponsor}}</p>
+
+                </div>
+              </div>
+                <div class="button-bar button-bar-full">
+                  <a class="button button-block button-small button-light ion-chatbox-working" href="#/tab/activities/{{activity.id}}/reviews">
+                    {{activity.commentnum}}
+                  </a>
+                  <a class="button button-block button-small button-assertive ion-location" href="#/tab/activities/{{activity.id}}"></a>
+                  <button style="color:red;" id="upvote{{$index}}" class="button button-block button-small button-light" ng-click="upvote({{$index}})">
+                    <i class="ion-heart"></i> <span ng-show="{{activity.event_likes}}"> {{activity.event_likes}}</span>
+                  </button>
+                </div>
+            </div>
+          </ion-content>
+<!--         </ion-side-menu-content> 
+        
+        <ion-side-menu side="left">
+          <ion-header-bar class="bar bar-header bar-assertive">
+            <h1 class="title">Category Filter</h1>
+          </ion-header-bar>
+          <ion-content has-header="true">
+            <ion-item ng-click="resetCate()">Reset filters</ion-item>
+            <ion-toggle class="item icon-left {{item.icon}}" ng-repeat="item in cateList"
+                    ng-model="item.checked" 
+                    ng-checked="item.checked">
+              {{ item.text }}
+            </ion-toggle>
+          </ion-content>
+        </ion-side-menu>
+      </ion-side-menus> -->
+</ion-view>
