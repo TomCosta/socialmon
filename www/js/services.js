@@ -62,6 +62,7 @@ angular.module('socialmon.services', [])
       for (var i = 0; i < activities.length; i++) {
         if (activities[i].id === parseInt(activityId)) {
           return activities[i];
+          console.log('Atividade: ',  activities[i]);
         }
       }
       return null;
